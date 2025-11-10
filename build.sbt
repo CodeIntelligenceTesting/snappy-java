@@ -94,6 +94,7 @@ crossPaths       := false
 
 libraryDependencies ++=
   Seq(
+    "com.code-intelligence" % "jazzer-junit"       % "0.26.0" % "test",
     "junit"               % "junit"              % "4.13.2"    % "test",
     "org.codehaus.plexus" % "plexus-classworlds" % "2.9.0"     % "test",
     "org.xerial.java"     % "xerial-core"        % "2.1"       % "test",

@@ -42,7 +42,8 @@ $(SNAPPY_OUT)/%.o: $(BITSHUFFLE_SRC_DIR)/%.c
 
 SNAPPY_OBJ:=$(addprefix $(SNAPPY_OUT)/,$(patsubst %.cc,%.o,$(SNAPPY_CC)) $(patsubst %.c,%.o,$(BITSHUFFLE_C)) SnappyNative.o BitShuffleNative.o)
 
-CXXFLAGS:=$(CXXFLAGS) -I$(SNAPPY_SRC_DIR) -I$(SNAPPY_OUT) -I$(BITSHUFFLE_SRC_DIR)
+CXXFLAGS:=$(CXXFLAGS) -I$(SNAPPY_SRC_DIR) -I$(SNAPPY_OUT) -I$(BITSHUFFLE_SRC_DIR) -fsanitize=fuzzer-no-link,address
+CXX:=clang++
 
 ifndef CXXFLAGS_BITSHUFFLE
   ifeq ($(OS_NAME)-$(OS_ARCH),Linux-x86_64)
