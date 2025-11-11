@@ -349,3 +349,10 @@ ifneq ($(jni_include),)
 CXXFLAGS := $(CXXFLAGS) -I"$(jni_include)"
 endif
 
+ifdef CXXFLAGS_EXTRA
+CXXFLAGS := $(CXXFLAGS) $(CXXFLAGS_EXTRA)
+endif
+
+ifdef LINKFLAGS_EXTRA
+LINKFLAGS := $(LINKFLAGS) $(LINKFLAGS_EXTRA)
+endif
