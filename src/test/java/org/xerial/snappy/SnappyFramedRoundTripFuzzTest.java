@@ -20,12 +20,11 @@ public final class SnappyFramedRoundTripFuzzTest {
     private SnappyFramedRoundTripFuzzTest() {
     }
 
-    public static void fuzzerTestOneInput(byte @NotNull [] data) {
+    public static void fuzzerTestOneInput(byte @NotNull [] data, int config) {
         if (data.length == 0) {
             return;
         }
 
-        int config = data[0] & 0xFF;
         byte[] payload = Arrays.copyOfRange(data, 1, Math.min(data.length, MAX_INPUT_SIZE + 1));
 
         int blockSize = computeBlockSize(config);
