@@ -33,7 +33,7 @@ public final class SnappyFramedRoundTripFuzzTest {
         try {
             byte[] framed = encodeFramedPayload(payload, blockSize, minRatio, (config & 0x20) != 0);
             roundTrip(payload, framed, (config & 0x01) == 0, (config & 0x40) != 0);
-        } catch (IOException | OutOfMemoryError | IllegalArgumentException | SnappyError ignored) {
+        } catch (IOException | SnappyError ignored) {
             // Construction can legitimately fail for extreme parameter combinations.
         }
     }

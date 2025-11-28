@@ -5,6 +5,9 @@ organization     := "org.xerial.snappy"
 organizationName := "xerial.org"
 description      := "snappy-java: A fast compression/decompression library"
 
+// Include local Maven cache (~/.m2) so dev builds are discoverable
+resolvers += Resolver.mavenLocal
+
 ThisBuild / publishTo := {
   val centralSnapshots = "https://central.sonatype.com/repository/maven-snapshots/"
   if (isSnapshot.value)
@@ -94,8 +97,9 @@ crossPaths       := false
 
 libraryDependencies ++=
   Seq(
-    "com.code-intelligence" % "jazzer-junit"       % "0.26.0" % "test",
+    "com.code-intelligence" % "jazzer-junit"     % "0.28.0"    % "test",
     "junit"               % "junit"              % "4.13.2"    % "test",
+    "org.apache.commons"  % "commons-compress"   % "1.28.0"    % "test",
     "org.codehaus.plexus" % "plexus-classworlds" % "2.9.0"     % "test",
     "org.xerial.java"     % "xerial-core"        % "2.1"       % "test",
     "org.wvlet.airframe" %% "airframe-log"       % "2025.1.19" % "test",

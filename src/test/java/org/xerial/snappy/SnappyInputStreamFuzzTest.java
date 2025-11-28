@@ -28,7 +28,7 @@ public final class SnappyInputStreamFuzzTest {
         try {
             byte[] encoded = encodeWithSnappyOutputStream(payload, mode);
             verifyRoundTrip(payload, encoded, mode);
-        } catch (IOException | OutOfMemoryError | IllegalArgumentException | SnappyError ignored) {
+        } catch (IOException | SnappyError ignored) {
             // Invalid stream layouts or extreme size requests can legitimately surface here.
         }
     }
@@ -77,22 +77,16 @@ public final class SnappyInputStreamFuzzTest {
         try (SnappyInputStream typed = new SnappyInputStream(new ByteArrayInputStream(encoded))) {
             if (payload.length >= Long.BYTES) {
                 int longCount = payload.length / Long.BYTES;
-                if (longCount > 0) {
-                    long[] longs = new long[longCount];
-                    typed.read(longs, 0, longCount);
-                }
+                long[] longs = new long[longCount];
+                typed.read(longs, 0, longCount);
             } else if (payload.length >= Integer.BYTES) {
                 int intCount = payload.length / Integer.BYTES;
-                if (intCount > 0) {
-                    int[] ints = new int[intCount];
-                    typed.read(ints, 0, intCount);
-                }
+                int[] ints = new int[intCount];
+                typed.read(ints, 0, intCount);
             } else if (payload.length >= Short.BYTES) {
                 int shortCount = payload.length / Short.BYTES;
-                if (shortCount > 0) {
-                    short[] shorts = new short[shortCount];
-                    typed.read(shorts, 0, shortCount);
-                }
+                short[] shorts = new short[shortCount];
+                typed.read(shorts, 0, shortCount);
             } else {
                 byte[] single = new byte[1];
                 typed.read(single, 0, 1);
